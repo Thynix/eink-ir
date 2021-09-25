@@ -78,10 +78,8 @@ raw_frame = [0] * 768
 while True:
     mlx.getFrame(raw_frame)
 
-    # Assign colors based on even-probability bands per-frame.
-    #bands = statistics.quantiles(raw_frame)
-    #print(bands)
     # Assign colors based on evenly-sized bands from min to max.
+    # Option 1
     min_temp = min(raw_frame)
     max_temp = max(raw_frame)
     band_size = (max_temp - min_temp) / 3
@@ -90,7 +88,12 @@ while True:
         min_temp + band_size * 2,
         min_temp + band_size * 3,
     ]
-    banner_text.text = "{} C - {} C".format(min_temp, max_temp)
+
+    # Assign colors based on even-probability bands per-frame.
+    # Option 2
+    bands = statistics.quantiles(raw_frame)
+
+    banner_text.text = "{} C - {} C; bands {}".format(min_temp, max_temp, bands)
 
     # Use white for brightest band.
     image.fill(3)
