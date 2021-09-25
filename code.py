@@ -82,7 +82,10 @@ def main():
 
     raw_frame = [0] * 768
     while True:
+        # Keep LED on during frame capture.
+        led.value = True
         mlx.getFrame(raw_frame)
+        led.value = False
 
         # Assign colors based on even-probability bands per-frame.
         bands = statistics.quantiles(raw_frame)
@@ -120,15 +123,14 @@ def main():
 
         magtag.graphics.display.show(frame_group)
 
-        # Perform and wait for refresh; keep LED on during it.
-        led.value = True
+        # Perform and wait for refresh.
         refresh_time = magtag.graphics.display.time_to_refresh
         if refresh_time > 0:
             magtag.enter_light_sleep(refresh_time)
+
         magtag.graphics.display.refresh()
         while magtag.graphics.display.busy:
             pass
-        led.value = False
 
 
 def make_label():
