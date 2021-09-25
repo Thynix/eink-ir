@@ -30,10 +30,10 @@ mlx.refresh_rate = adafruit_mlx90640.RefreshRate.REFRESH_1_HZ
 # IR image has 32x24:
 #   - 5.3 pixel height
 #   - 9.25 pixel width
-# Round down to whole pixels:
-#   - IR image gets 9x5 e-ink pixels per pixel.
+# Round down to whole pixels, and restrict to uniform scaling:
+#   - IR image gets 5x5 e-ink pixels per pixel.
 #   - Takes up:
-#               - 288/296 pixels horizontally - 8 columns remain.
+#               - 160/296 pixels horizontally - 136 columns remain.
 #               - 120/128 pixels vertically - 8 rows remain.
 greyscale_palette = displayio.Palette(4)
 greyscale_palette[0] = 0x000000 # Black
@@ -49,7 +49,7 @@ image_frame = displayio.TileGrid(
 image_group = displayio.Group(
     scale=5,
     # Center frame horizontally and align it at the bottom vertically.
-    x=4,
+    x=136 // 2,
     y=8,
 )
 image_group.append(image_frame)
