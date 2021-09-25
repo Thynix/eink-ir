@@ -41,18 +41,18 @@ greyscale_palette[1] = 0x555555 # Light grey
 greyscale_palette[2] = 0xAAAAAA # Dark grey
 greyscale_palette[3] = 0xFFFFFF # Black
 
-image = displayio.Bitmap(288, 120, 4)
+image = displayio.Bitmap(32, 24, 4)
 image_frame = displayio.TileGrid(
     bitmap=image,
     pixel_shader=greyscale_palette,
-    width=32,
-    height=24,
-    tile_width=9,
-    tile_height=5,
+)
+image_group = displayio.Group(
+    scale=5,
     # Center frame horizontally and align it at the bottom vertically.
     x=4,
     y=8,
 )
+image_group.append(image_frame)
 
 # Text banner along the top.
 banner_text = label.Label(
@@ -71,7 +71,7 @@ bg_group.append(bg_sprite)
 
 frame_group = displayio.Group()
 frame_group.append(bg_group)
-frame_group.append(image_frame)
+frame_group.append(image_group)
 frame_group.append(banner_text)
 
 raw_frame = [0] * 768
