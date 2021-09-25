@@ -104,11 +104,6 @@ while True:
                     image[x, y] = i
                     break
 
-            print(image[x, y], end=" ")
-            #print("{:0.1f},".format(raw_frame[y * 24 + x]), end="")
-        print()
-    print()
-
     magtag.graphics.display.show(frame_group)
 
     # Perform and wait for refresh; keep LED on during it.
@@ -120,6 +115,3 @@ while True:
     while magtag.graphics.display.busy:
         pass
     led.value = False
-
-    print(gc.mem_free())
-
