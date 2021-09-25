@@ -92,16 +92,15 @@ while True:
     ]
     banner_text.text = "{} C - {} C".format(min_temp, max_temp)
 
+    # Use white for brightest band.
+    image.fill(3)
     for y in range(24):
         for x in range(32):
-            image[x, y] = 3
             for i, bound in enumerate(bands):
                 if raw_frame[y * 24 + x] < bound:
                     image[x, y] = i
                     break
 
-    for y in range(24):
-        for x in range(32):
             print(image[x, y], end=" ")
             #print("{:0.1f},".format(raw_frame[y * 24 + x]), end="")
         print()
