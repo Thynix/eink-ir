@@ -59,6 +59,7 @@ banner_text = label.Label(
     terminalio.FONT,
     color=0x000000,
 )
+# Top few pixels stay black for some reason.
 banner_text.y = 3
 
 # White background; scaled to save RAM.
